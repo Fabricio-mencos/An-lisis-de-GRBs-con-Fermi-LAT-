@@ -1,0 +1,93 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{circuitikz}
+\usepackage{fancyhdr} 
+\usepackage{ragged2e}
+\usepackage{amssymb}
+\usepackage{blindtext} 
+\usepackage{xcolor} 
+\usepackage{url}
+\usepackage[svgnames]{xcolor}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage[numbers]{natbib}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\captionsetup[table]{position=top,skip=8pt}
+\captionsetup[figure]{skip=6pt}
+\renewcommand{\arraystretch}{1.3}
+\emergencystretch=1.5em
+\usepackage{tikz}
+\usepackage{lipsum} % Solo para texto de ejemplo
+
+% Definición del estilo para el código
+\lstdefinestyle{mipython}{
+    language=Python,
+    backgroundcolor=\color{lightgray!10},
+    basicstyle=\ttfamily\small,
+    breaklines=true,           % Rompe líneas largas automáticamente
+    breakatwhitespace=true,    % Rompe solo en espacios (ideal para URLs)
+    frame=single,              % Recuadro simple alrededor
+    numbers=left,              % Números de línea
+    numberstyle=\tiny\color{gray},
+    captionpos=b,
+    tabsize=4
+}
+
+\definecolor{shadecolor}{named}{LightGray}
+
+\topmargin=-1cm
+\oddsidemargin=0cm
+\textheight=24cm
+\textwidth=17cm
+
+\usetikzlibrary{shapes.geometric} 
+\usetikzlibrary{
+    arrows.meta,
+    decorations.pathmorphing,
+    patterns, 
+    calc
+}  
+
+\definecolor{shadecolor}{named}{LightGray}
+\topmargin=-1cm
+\oddsidemargin=0cm
+\textheight=24cm
+\textwidth=17cm
+
+\begin{document}
+
+\input{Portada}
+
+\newpage 
+\renewcommand{\contentsname}{Índice}
+\tableofcontents
+\newpage
+
+\input{Introduccion}
+\input{MarcoTeorico}
+\input{Metodologia}
+\input{Resultados}
+\input{Conclusiones}
+\input{Anexo}
+
+
+
+
+
+\newpage
+\bibliographystyle{unsrtnat}  
+\bibliography{ref}            
+
+\end{document}

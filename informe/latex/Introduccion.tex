@@ -1,0 +1,23 @@
+\section{Introducción}
+
+Los estallidos de rayos gamma (Gamma-Ray Bursts, GRBs) son destellos intensos y breves, que durante unos pocos segundos, se vuelven la fuente electromagnética más energética y brillante del Universo \cite{Piran2000} en rayos X duros y gammas de hasta 100 MeV. La duración de estos puede variar desde algunos milisegundos hasta varios miles de segundos, el espectro de este fenómeno no es térmico y se describe con una componente de ley de potencias que se extiende desde cientos de keV hasta varios GeV. Estos fenómenos están asociados al colapso de estrellas masivas (largos) o a la fusión de objetos compactos (cortos) \cite{Rosswog2009}. 
+
+\vspace{0.5cm}
+
+ Los GRBs generan chorros relativistas en donde se aceleran partículas, principalmente electrones, que radian emisión sincrotrón en condiciones donde la densidad y el campo magnético son extremos. Debido a su enorme luminosidad y a esas condiciones físicas tan extremas, los GRBs representan un laboratorio natural para el estudio de procesos relativistas, aceleración de partículas y emisión de radiación de alta energía. La detección de GRBs que superan los 100 MeV es posible gracias al \textbf{Fermi Large Area Telescope (LAT)}, un detector espacial sensible a fotones gamma en el rango aproximado de 20 MeV a más de 300 GeV \cite{Atwood2009}. El LAT está compuesto por un sistema de rastreo basado en detectores de silicio (Silicon-Strip Tracker, TKR), un calorímetro de CsI(Tl) (CAL) y un detector anti-coincidencia (ACD), los cuales permiten reconstruir la dirección y la energía de los fotones incidentes mediante la creación de pares $(\gamma\rightarrow e^{-}+e^{+})$. Este último proceso es posible gracias a varias láminas de tungsteno, dentro del TKR, que actúan como material convertidor.
+
+\vspace{0.5cm}
+
+El amplio campo de visión del LAT, cercano al $20\%$ del cielo en cada instante, junto con su modo de operación \textit{sky survey}, que permite cubrir prácticamente todo el cielo cada tres horas, convierten al LAT en el instrumento de referencia para el estudio sistemático de GRBs en el rango de energías GeV \cite{Atwood2009}. En este régimen energético, el LAT ha permitido detectar emisión extendida de alta energía que puede persistir después de la emisión \textit{prompt} observada por el \textbf{Fermi Gamma-Ray Burst Monitor (GBM)}, proporcionando información fundamental sobre la física de los chorros relativistas y la evolución temporal de los GRBs.
+
+\vspace{0.5cm}
+
+El objetivo principal de este trabajo fue adquirir experiencia en el uso de las herramientas oficiales de análisis del LAT (Fermitools) para el estudio de GRBs. Como primera etapa, se reprodujo el flujo de trabajo descrito en el tutorial oficial de Fermitools aplicado al GRB 080916C, uno de los eventos más brillantes detectados por la misión Fermi. Esta fase permitió comprender y reconstruir el proceso completo de reducción y análisis de datos, incluyendo la selección de eventos, la generación de mapas de conteos, la construcción de curvas de luz y la realización de análisis espectrales mediante métodos de máxima verosimilitud binados y no binados. 
+
+\vspace{0.5cm}
+
+Posteriormente, el procedimiento aprendido se aplicó al GRB 251118A, que fue detectado el 18 de noviembre de 2025 y reportado por GCN Circular 42752 \cite{GCN42752}. Este evento presentó una detección considerablemente más débil en el LAT, con apenas 35 fotones en la región de interés, de los cuales el modelo atribuye unos ocho al GRB, lo que resultó ser un caso de estudio verdaderamente útil para determinar las limitaciones del análisis de eventos con un número bajo de conteos. Los resultados que se obtuvieron de este análisis, fueron congruentes con lo reportado para el GRB 251118A, pues se reprodujo de forma satisfactoria la detección del evento y sus principales parámetros espectrales. Todo esto permitió validar el flujo del análisis aprendido durante las prácticas y adquirir experiencia en el análisis e interpretación de datos de altas energías provenientes del LAT. 
+
+\vspace{0.5cm}
+
+El presente informe documenta el procedimiento seguido durante las prácticas, el fundamento teórico necesario para comprender el análisis realizado, la metodología empleada en el procesamiento de los datos, los resultados obtenidos para los GRBs estudiados y la discusión de sus implicaciones físicas, finalizando con las conclusiones derivadas del trabajo desarrollado.

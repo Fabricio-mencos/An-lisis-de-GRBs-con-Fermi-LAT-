@@ -1,0 +1,21 @@
+\newpage
+\begin{center}
+\section*{Conclusiones}
+\end{center}
+
+\begin{itemize}
+\setlength{\itemsep}{0.4cm}
+
+\item Se preparó y verificó el entorno necesario para analizar GRB con datos del LAT. Se instaló Fermitools mediante conda en el entorno \texttt{fermi}, junto con XSPEC (v12.15.1) y las bibliotecas de Python con las que se leyeron los archivos FITS y se elaboraron las gráficas (\texttt{astropy}, \texttt{numpy} y \texttt{matplotlib}). Las pruebas realizadas comprobaron el funcionamiento de las herramientas y la disponibilidad de los archivos de calibración y de los modelos de fondo, con lo que se contó con un entorno funcional para trabajar con datos reales del LAT.
+
+\item La reproducción del análisis del GRB 080916C permitió comprobar que el entorno funcionaba correctamente antes de aplicarlo a un evento distinto. Se siguió el flujo completo del tutorial oficial de Fermitools, desde la selección y preparación de los datos hasta el ajuste de máxima verosimilitud con \texttt{gtlike} y el análisis espectral con XSPEC. Por tratarse de un GRB ampliamente estudiado y con resultados disponibles en la literatura, este caso sirvió para aprender el procedimiento y verificar que las herramientas funcionaban en conjunto. El ajuste binned de la fase prompt dio un índice $\mathrm{PhoIndex} = 2.32 \pm 0.08$ y el ajuste unbinned de la emisión extendida dio una detección con $\mathrm{TS}=455$ y $\Gamma = -2.02 \pm 0.11$, valores del mismo orden que los reportados en la literatura para este evento.
+
+\item El análisis del GRB 251118A permitió aplicar el flujo completo de trabajo a un evento real, desde la descarga y selección de los datos hasta el análisis espectral y de máxima verosimilitud. Entre los fotones de la ventana de análisis se identificó el fotón de 6.8~GeV reportado en la circular, reconstruido a solo 0.05$^{\circ}$ de la posición del afterglow. El ajuste de máxima verosimilitud dio una detección con $\mathrm{TS}=46.0$, equivalente a unas 6.5$\sigma$, un índice $\Gamma = -1.80 \pm 0.30$ y un flujo de $(2.22\pm1.03)\times10^{-6}$~ph~cm$^{-2}$~s$^{-1}$, que difieren de los valores de la circular GCN en 0.0 y 0.3 incertidumbres combinadas, respectivamente. El ajuste binned de control en XSPEC ($\mathrm{PhoIndex} = 1.98 \pm 0.17$) quedó a 0.5$\sigma$ de ambos índices.
+
+\item Las variantes del modelo mostraron que, cuando se dispone de pocos fotones, el tratamiento del fondo galáctico es la decisión que más influye en el resultado. Fijar su normalización en el valor nominal subió el TS de 42.7 a 46.0, mientras que fijar también el índice espectral no cambió el TS y solo redujo el error del flujo, como se espera al quitar un parámetro libre.
+
+\item El trabajo quedó documentado en este informe, que incluye el procedimiento seguido, los fundamentos de las herramientas utilizadas, las decisiones metodológicas, los problemas encontrados y la interpretación de los resultados principales. Su elaboración permitió organizar el proceso completo del análisis y dejar registro de lo aprendido durante las prácticas, desde la preparación del entorno hasta el estudio del GRB 251118A. Los cuadernos de Jupyter con el flujo completo de ambos análisis, ya ejecutados, están disponibles en un repositorio público\footnote{\url{https://github.com/USUARIO/REPOSITORIO}}.
+
+\item En conjunto, las prácticas permitieron pasar de la configuración inicial de las herramientas a un análisis completo de un GRB con datos del LAT, con resultados para el GRB 251118A consistentes con los publicados en la GCN 42752. Además del uso de Fermitools, XSPEC y las distintas etapas del procesamiento de datos, el análisis mostró la importancia de las decisiones metodológicas, en especial del tratamiento del fondo cuando se trabaja con pocos fotones. Esta experiencia ofrece una base práctica para continuar con el análisis de GRB y de otros fenómenos transitorios en la astrofísica de altas energías.
+
+\end{itemize}

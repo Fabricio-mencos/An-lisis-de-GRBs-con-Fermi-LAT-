@@ -1,0 +1,174 @@
+\newpage
+\appendix
+\section{Llamadas a las herramientas de Fermitools}
+\label{anexo:comandos}
+
+Este anexo recoge las llamadas completas a cada herramienta utilizada en el análisis, en el orden en que
+aparecen en la Metodología. Cada línea corresponde a un parámetro de la herramienta (archivo de entrada,
+archivo de salida, cortes, etc.); los valores entre \texttt{<~>} dependen del GRB analizado y se indican
+en la sección de Resultados.
+
+\subsection{Selección inicial de eventos}
+\label{an:gtselect}
+
+\begin{lstlisting}[style=mipython]
+gtselect \
+  infile=<archivo_de_eventos>.fits \
+  outfile=<archivo_filtrado>.fits \
+  ra=INDEF \
+  dec=INDEF \
+  rad=15 \
+  tmin=<MET_inicio> \
+  tmax=<MET_fin> \
+  emin=100 \
+  emax=300000 \
+  zmax=100 \
+  evclass=16
+\end{lstlisting}
+
+\subsection{Curva de luz}
+\label{an:lc}
+
+\begin{lstlisting}[style=mipython]
+gtbin \
+  algorithm=LC \
+  evfile=<archivo_filtrado>.fits \
+  outfile=<curva_de_luz>.fits \
+  scfile=<archivo_de_nave>.fits \
+  tstart=<MET_inicio> \
+  tstop=<MET_fin> \
+  dtime=<ancho_del_bin> \
+  tbinalg=LIN
+\end{lstlisting}
+
+\subsection{Localización de la fuente}
+\label{an:gtfindsrc}
+
+\begin{lstlisting}[style=mipython]
+gtfindsrc \
+  evfile=<archivo_filtrado>.fits \
+  scfile=<archivo_de_nave>.fits \
+  outfile=<resultado_localizacion>.txt \
+  irfs=P8R3_TRANSIENT020_V3 \
+  coordsys=CEL \
+  ra=<RA_semilla> \
+  dec=<Dec_semilla> \
+  optimizer=MINUIT
+\end{lstlisting}
+
+\subsection{Contribución difusa}
+\label{an:gtdiffrsp}
+
+\begin{lstlisting}[style=mipython]
+gtdiffrsp \
+  evfile=<archivo_filtrado>.fits \
+  scfile=<archivo_de_nave>.fits \
+  srcmdl=<modelo>.xml \
+  irfs=<IRF_de_la_fase>
+\end{lstlisting}
+
+\subsection{Espectro de conteos y matriz de respuesta (análisis binned)}
+\label{an:binned}
+
+\begin{lstlisting}[style=mipython]
+gtbin \
+  algorithm=PHA1 \
+  evfile=<archivo_filtrado>.fits \
+  outfile=<espectro>.pha \
+  scfile=<archivo_de_nave>.fits \
+  ebinalg=LOG \
+  emin=100 \
+  emax=300000 \
+  enumbins=30
+
+gtrspgen \
+  respalg=PS \
+  specfile=<espectro>.pha \
+  scfile=<archivo_de_nave>.fits \
+  outfile=<respuesta>.rsp \
+  thetacut=90 \
+  dcostheta=0.5 \
+  irfs=CALDB \
+  ebinalg=LOG \
+  emin=100 \
+  emax=300000 \
+  enumbins=100
+\end{lstlisting}
+
+\subsection{Ajuste espectral en XSPEC}
+\label{an:xspec}
+
+\begin{lstlisting}[style=mipython]
+xspec
+query yes
+data <espectro>.pha
+model pow
+    <PhoIndex inicial>
+    <norm inicial>
+statistic cstat
+cpd /xs
+setplot energy
+fit
+plot ldata delchi
+show all
+\end{lstlisting}
+
+\subsection{Preparación de la ventana extendida}
+\label{an:extendida}
+
+\begin{lstlisting}[style=mipython]
+gtselect evclass=128 \
+  infile=<FT1>.fits \
+  outfile=<seleccion_extendida>.fits \
+  ra=<RA> \
+  dec=<Dec> \
+  rad=15 \
+  tmin=<MET_inicio_ext> \
+  tmax=<MET_fin_ext> \
+  emin=100 \
+  emax=300000 \
+  zmax=100
+
+gtmktime \
+  scfile=<FT2>.fits \
+  filter="(DATA_QUAL>0)&&(LAT_CONFIG==1)" \
+  roicut=yes \
+  evfile=<seleccion_extendida>.fits \
+  outfile=<mktime_extendida>.fits
+
+gtdiffrsp \
+  evfile=<mktime_extendida>.fits \
+  scfile=<FT2>.fits \
+  srcmdl=<modelo>.xml \
+  irfs=P8R3_SOURCE_V3
+
+gtltcube \
+  evfile=<mktime_extendida>.fits \
+  scfile=<FT2>.fits \
+  outfile=<ltcube_extendida>.fits \
+  dcostheta=0.025 \
+  binsz=0.5
+
+gtexpmap \
+  evfile=<mktime_extendida>.fits \
+  scfile=<FT2>.fits \
+  expcube=<ltcube_extendida>.fits \
+  outfile=<expmap_extendida>.fits \
+  irfs=P8R3_SOURCE_V3
+\end{lstlisting}
+
+\subsection{Ajuste de máxima verosimilitud}
+\label{an:gtlike}
+
+\begin{lstlisting}[style=mipython]
+gtlike \
+  statistic=UNBINNED \
+  results=<resultados>.dat \
+  scfile=<FT2>.fits \
+  evfile=<mktime_extendida>.fits \
+  expmap=<expmap_extendida>.fits \
+  expcube=<ltcube_extendida>.fits \
+  srcmdl=<modelo>.xml \
+  irfs=P8R3_SOURCE_V3 \
+  optimizer=MINUIT
+\end{lstlisting}
